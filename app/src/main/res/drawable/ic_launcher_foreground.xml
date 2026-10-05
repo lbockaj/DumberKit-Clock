@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- alarm clock pictogram: round body, two bells, hands at 12 and 9, two legs (white on the icon color) -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="512"
+    android:viewportHeight="512">
+    <!-- bells -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M128,206 A66,66 0 0,1 206,128 Z" />
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M306,128 A66,66 0 0,1 384,206 Z" />
+    <!-- body -->
+    <path
+        android:pathData="M256,173 A97,97 0 1,1 255.9,173 Z"
+        android:strokeWidth="20"
+        android:strokeColor="#FFFFFFFF" />
+    <!-- hands -->
+    <path
+        android:pathData="M256,270 L256,212 M256,270 L210,270"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:strokeWidth="20"
+        android:strokeColor="#FFFFFFFF" />
+    <!-- legs -->
+    <path
+        android:pathData="M194,346 L170,374 M318,346 L342,374"
+        android:strokeLineCap="round"
+        android:strokeWidth="20"
+        android:strokeColor="#FFFFFFFF" />
+</vector>

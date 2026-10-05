@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- columns, then the Cancel / Save rows under a divider -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/my_time_picker_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/my_time_picker_holder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingStart="@dimen/activity_margin"
+        android:paddingTop="@dimen/activity_margin"
+        android:paddingEnd="@dimen/activity_margin">
+
+        <com.shawnlin.numberpicker.NumberPicker
+            android:id="@+id/my_time_picker_hours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/small_margin"
+            app:np_fadingEdgeEnabled="false"
+            app:np_formatter="%02d"
+            app:np_max="23"
+            app:np_min="0"
+            app:np_selectedTextSize="@dimen/dpad_picker_text_size"
+            app:np_textSize="@dimen/big_text_size" />
+
+        <org.fossify.commons.views.MyTextView
+            android:id="@+id/my_time_picker_colon_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/medium_margin"
+            android:text=":"
+            android:textSize="@dimen/dpad_picker_text_size" />
+
+        <com.shawnlin.numberpicker.NumberPicker
+            android:id="@+id/my_time_picker_minutes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/small_margin"
+            app:np_fadingEdgeEnabled="false"
+            app:np_formatter="%02d"
+            app:np_max="59"
+            app:np_min="0"
+            app:np_selectedTextSize="@dimen/dpad_picker_text_size"
+            app:np_textSize="@dimen/big_text_size" />
+
+        <org.fossify.commons.views.MyTextView
+            android:id="@+id/my_time_picker_colon_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/medium_margin"
+            android:text=":"
+            android:textSize="@dimen/dpad_picker_text_size" />
+
+        <com.shawnlin.numberpicker.NumberPicker
+            android:id="@+id/my_time_picker_seconds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/small_margin"
+            app:np_fadingEdgeEnabled="false"
+            app:np_formatter="%02d"
+            app:np_max="59"
+            app:np_min="0"
+            app:np_selectedTextSize="@dimen/dpad_picker_text_size"
+            app:np_textSize="@dimen/big_text_size" />
+
+    </LinearLayout>
+
+    <include
+        android:id="@+id/my_time_picker_rows"
+        layout="@layout/dpad_save_cancel_rows" />
+</LinearLayout>

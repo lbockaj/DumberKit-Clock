@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Ringing alarm for keypad phones: the time on top, then snooze ← alarm → dismiss in a row, the arrows being the
+     keys, with a short text under snooze and dismiss -->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/reminder_holder"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <org.fossify.commons.views.MyTextView
+        android:id="@+id/reminder_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFeatureSettings="tnum"
+        android:textSize="@dimen/dpad_ringing_time_size"
+        app:layout_constraintBottom_toTopOf="@+id/reminder_draggable"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="05:00" />
+
+    <ImageView
+        android:id="@+id/reminder_snooze"
+        android:layout_width="@dimen/reminder_background_min_size"
+        android:layout_height="@dimen/reminder_background_min_size"
+        android:clickable="false"
+        android:contentDescription="@string/snooze"
+        android:padding="@dimen/activity_margin"
+        android:src="@drawable/ic_snooze_vector"
+        app:layout_constraintBottom_toBottomOf="@+id/reminder_draggable"
+        app:layout_constraintEnd_toStartOf="@+id/reminder_draggable"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/reminder_draggable" />
+
+    <ImageView
+        android:id="@+id/reminder_draggable_background"
+        android:layout_width="@dimen/reminder_background_min_size"
+        android:layout_height="@dimen/reminder_background_min_size"
+        android:alpha="0.2"
+        android:importantForAccessibility="no"
+        android:padding="@dimen/medium_margin"
+        android:src="@drawable/pulsing_background"
+        app:layout_constraintBottom_toBottomOf="@+id/reminder_draggable"
+        app:layout_constraintEnd_toEndOf="@+id/reminder_draggable"
+        app:layout_constraintStart_toStartOf="@+id/reminder_draggable"
+        app:layout_constraintTop_toTopOf="@+id/reminder_draggable" />
+
+    <ImageView
+        android:id="@+id/reminder_draggable"
+        android:layout_width="@dimen/reminder_background_min_size"
+        android:layout_height="@dimen/reminder_background_min_size"
+        android:importantForAccessibility="no"
+        android:padding="@dimen/activity_margin"
+        android:src="@drawable/ic_alarm_vector"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/reminder_dismiss"
+        app:layout_constraintStart_toEndOf="@+id/reminder_snooze"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.6" />
+
+    <ImageView
+        android:id="@+id/reminder_dismiss"
+        android:layout_width="@dimen/reminder_background_min_size"
+        android:layout_height="@dimen/reminder_background_min_size"
+        android:clickable="false"
+        android:contentDescription="@string/dismiss"
+        android:padding="@dimen/activity_margin"
+        android:src="@drawable/ic_alarm_off_vector"
+        app:layout_constraintBottom_toBottomOf="@+id/reminder_draggable"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/reminder_draggable"
+        app:layout_constraintTop_toTopOf="@+id/reminder_draggable" />
+
+    <org.fossify.commons.views.MyTextView
+        android:id="@+id/snooze_label"
+        style="@style/DpadRingingLabel"
+        android:text="@string/snooze"
+        app:layout_constraintEnd_toEndOf="@+id/reminder_snooze"
+        app:layout_constraintStart_toStartOf="@+id/reminder_snooze"
+        app:layout_constraintTop_toBottomOf="@+id/reminder_snooze" />
+
+    <!-- the alarm's label stays for the activity code, the middle pictogram has no text -->
+    <org.fossify.commons.views.MyTextView
+        android:id="@+id/reminder_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- the keys: left snoozes, right dismisses -->
+    <ImageView
+        android:id="@+id/reminder_left_hint"
+        android:layout_width="@dimen/dpad_stopwatch_hint_size"
+        android:layout_height="@dimen/dpad_stopwatch_hint_size"
+        android:alpha="0.6"
+        android:importantForAccessibility="no"
+        android:src="@drawable/ic_dpad_arrow_left_vector"
+        app:layout_constraintBottom_toBottomOf="@+id/reminder_draggable"
+        app:layout_constraintEnd_toStartOf="@+id/reminder_draggable"
+        app:layout_constraintStart_toEndOf="@+id/reminder_snooze"
+        app:layout_constraintTop_toTopOf="@+id/reminder_draggable" />
+
+    <ImageView
+        android:id="@+id/reminder_right_hint"
+        android:layout_width="@dimen/dpad_stopwatch_hint_size"
+        android:layout_height="@dimen/dpad_stopwatch_hint_size"
+        android:alpha="0.6"
+        android:importantForAccessibility="no"
+        android:src="@drawable/ic_dpad_arrow_right_vector"
+        app:layout_constraintBottom_toBottomOf="@+id/reminder_draggable"
+        app:layout_constraintEnd_toStartOf="@+id/reminder_dismiss"
+        app:layout_constraintStart_toEndOf="@+id/reminder_draggable"
+        app:layout_constraintTop_toTopOf="@+id/reminder_draggable" />
+
+    <org.fossify.commons.views.MyTextView
+        android:id="@+id/dismiss_label"
+        style="@style/DpadRingingLabel"
+        android:text="@string/dismiss"
+        app:layout_constraintEnd_toEndOf="@+id/reminder_dismiss"
+        app:layout_constraintStart_toStartOf="@+id/reminder_dismiss"
+        app:layout_constraintTop_toBottomOf="@+id/reminder_dismiss" />
+
+    <!-- the swipe hint of the touch version, never shown with keys -->
+    <org.fossify.commons.views.MyTextView
+        android:id="@+id/reminder_guide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

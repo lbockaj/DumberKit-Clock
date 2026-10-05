@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- one row of a checklist dialog: OK toggles the checkbox -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dpad_check_row_holder"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true">
+
+    <org.fossify.commons.views.MyTextView
+        android:id="@+id/dpad_check_row_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@+id/dpad_check_row_checkbox"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:padding="@dimen/activity_margin"
+        android:textSize="@dimen/bigger_text_size" />
+
+    <org.fossify.commons.views.MyAppCompatCheckbox
+        android:id="@+id/dpad_check_row_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignTop="@+id/dpad_check_row_title"
+        android:layout_alignBottom="@+id/dpad_check_row_title"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/small_margin"
+        android:clickable="false"
+        android:focusable="false"
+        android:gravity="center" />
+
+</RelativeLayout>

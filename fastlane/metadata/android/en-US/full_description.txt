@@ -1,0 +1,13 @@
+A clock, alarm, stopwatch and timer for keypad phones like the Qin F21, Dumber Mini or Doov R77 Pro. Every screen, menu and dialog works with the D-pad and the keypad, no touchscreen needed.
+
+<ul>
+<li>Opens on a simple list: Clock, Alarm, Stopwatch, Timer, Settings</li>
+<li>Alarms: OK edits, left / right switch them off / on, days picked from a checklist</li>
+<li>Times typed with the digits (0730 = 07:30)</li>
+<li>Ringing alarm: left or OK snoozes, right dismisses</li>
+<li>Stopwatch with laps, timers with their own sound and label</li>
+<li>Your time zone and other time zones on the Clock screen</li>
+<li>No ads, no tracking, no internet access</li>
+</ul>
+
+Based on Fossify Clock (GPL-3.0).

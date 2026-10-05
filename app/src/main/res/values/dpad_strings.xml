@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dpad_clock">Clock</string>
+    <string name="dpad_add_time_zone">Add time zone</string>
+    <string name="dpad_sort">Sort</string>
+    <string name="dpad_turn_on">Turn on</string>
+    <string name="dpad_turn_off">Turn off</string>
+    <string name="dpad_start">Start</string>
+    <string name="dpad_pause">Pause</string>
+    <string name="dpad_reset">Reset</string>
+    <string name="dpad_sort_by_lap">Sort by lap</string>
+    <string name="dpad_sort_by_lap_time">Sort by lap time</string>
+    <string name="dpad_sort_by_total_time">Sort by total time</string>
+    <string name="dpad_touch_input">Allow touch input</string>
+    <string name="dpad_about_app_name" translatable="false">DumberKit Clock</string>
+    <string name="dpad_about_version">Version %s</string>
+    <string name="dpad_about_description">A clock, alarm, stopwatch and timer for keypad phones like the Qin F21, Dumber Mini or Doov R77 Pro. Everything works with the D-pad and the keypad, no touchscreen needed.</string>
+    <string name="dpad_about_shortcuts">Keypad shortcuts</string>
+    <string name="dpad_about_home">Home list</string>
+    <string name="dpad_about_time_picker">Picking a time</string>
+    <string name="dpad_about_license_title">License</string>
+    <string name="dpad_about_license">Free and open source software under the GNU General Public License v3.0. No ads, no tracking.</string>
+    <string name="dpad_key_ok" translatable="false">OK</string>
+    <string name="dpad_key_ok_hold">Hold OK</string>
+    <string name="dpad_key_up_down" translatable="false">↑ / ↓</string>
+    <string name="dpad_key_left_right" translatable="false">← / →</string>
+    <string name="dpad_key_left" translatable="false">←</string>
+    <string name="dpad_key_right" translatable="false">→</string>
+    <string name="dpad_key_digits" translatable="false">1–9, 0</string>
+    <string name="dpad_key_menu" translatable="false">Menu</string>
+    <string name="dpad_key_back">Back</string>
+    <string name="dpad_key_home_up_down_action">Move through the list</string>
+    <string name="dpad_key_home_ok_action">Open the selected screen</string>
+    <string name="dpad_key_home_digits_action">1–5 open Clock, Alarm, Stopwatch, Timer, Settings</string>
+    <string name="dpad_key_home_back_action">In a screen: back to the list</string>
+    <string name="dpad_key_alarm_ok_action">Open the alarm settings</string>
+    <string name="dpad_key_alarm_left_right_action">Turn the alarm off / on</string>
+    <string name="dpad_key_alarm_ok_hold_action">Turn on/off, delete</string>
+    <string name="dpad_key_alarm_menu_action">Delete the alarm, add one (also the + row), sort</string>
+    <string name="dpad_key_stopwatch_ok_action">Start / pause</string>
+    <string name="dpad_key_stopwatch_left_action">Reset (when paused)</string>
+    <string name="dpad_key_stopwatch_right_action">Lap (when running)</string>
+    <string name="dpad_key_stopwatch_menu_action">The same actions, sort the laps</string>
+    <string name="dpad_key_timer_ok_action">Edit, reset or delete the timer</string>
+    <string name="dpad_key_timer_left_action">Stop it (pause, or silence a finished one)</string>
+    <string name="dpad_key_timer_ok_hold_action">Start/pause, reset, edit, delete</string>
+    <string name="dpad_key_timer_menu_action">Sort (new timers: the + row at the end)</string>
+    <string name="dpad_key_clock_ok_action">Rename the time zone</string>
+    <string name="dpad_key_clock_ok_hold_action">Rename, delete</string>
+    <string name="dpad_key_clock_menu_action">Delete the time zone, add time zones (also the + row)</string>
+    <string name="dpad_key_picker_digits_action">Type the time, e.g. 0730 for 07:30</string>
+    <string name="dpad_key_picker_up_down_action">Change the selected number</string>
+    <string name="dpad_key_picker_left_right_action">Previous / next column</string>
+    <string name="dpad_key_picker_ok_action">Next column, from the last one to Save</string>
+    <string name="dpad_alarm_snooze">Snooze</string>
+    <string name="dpad_alarm_dismiss">Dismiss</string>
+    <string name="dpad_pick_color">Color</string>
+    <string name="dpad_pick_shade">Shade</string>
+    <string name="dpad_repeat">Repeat</string>
+    <string name="dpad_repeat_once">Does not repeat</string>
+    <string name="dpad_key_timer_right_action">Start the timer</string>
+    <string name="dpad_overlay_explanation">DumberOS shows no pop-up notifications, so with the phone unlocked a ringing alarm could only be heard, not snoozed or dismissed with the keys. Allow \"Display over other apps\" on the next screen and the alarm will open on the whole screen.</string>
+    <string name="dpad_not_now">Not now</string>
+    <string name="dpad_alarm_over_apps">Alarm over other apps</string>
+    <string name="dpad_allowed">Allowed</string>
+    <string name="dpad_not_allowed">Not allowed, the alarm only rings on an unlocked phone</string>
+</resources>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/timer_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/timer_holder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <org.fossify.commons.views.MyRecyclerView
+            android:id="@+id/timers_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            android:overScrollMode="never"
+            android:scrollbars="none"
+            app:layoutManager="org.fossify.commons.views.MyLinearLayoutManager"
+            tools:listitem="@layout/item_timer" />
+
+        <org.fossify.commons.views.MyTextView
+            android:id="@+id/timers_placeholder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0.8"
+            android:gravity="center"
+            android:padding="@dimen/medium_margin"
+            android:text="@string/no_timers_found"
+            android:textSize="@dimen/bigger_text_size"
+            android:textStyle="italic"
+            android:visibility="gone" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider_grey" />
+
+        <include
+            android:id="@+id/timers_add"
+            layout="@layout/dpad_add_row" />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

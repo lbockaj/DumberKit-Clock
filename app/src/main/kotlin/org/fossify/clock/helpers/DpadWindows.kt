@@ -1,0 +1,56 @@
+package org.fossify.clock.helpers
+
+import android.view.View
+import android.view.ViewGroup
+import android.widget.AbsListView
+import android.widget.Button
+import android.widget.CompoundButton
+import android.widget.EditText
+import android.widget.NumberPicker
+import androidx.recyclerview.widget.RecyclerView
+import org.fossify.clock.R
+
+/**
+ * Dialogs from Commons (radio lists, sort options, alarm sounds…) were made for touch: their rows don't show the
+ * focus and the focus starts on a button. Every new dialog window is prepared once (see NoTouch.kt): clickable rows
+ * get the focus highlight, and if nothing else was focused yet, the checked option (or the first row) gets the focus.
+ * Dialog buttons keep their own style, our own dialogs set up their focus themselves.
+ */
+fun prepareWindowForKeys(root: View) {
+    val rows = ArrayList<View>()
+    fun collect(view: View) {
+        if (!view.isShown) {
+            return
+        }
+
+        // lists, pickers and popup menus handle their own items
+        if (view is AbsListView || view is RecyclerView || view is NumberPicker || view is com.shawnlin.numberpicker.NumberPicker) {
+            return
+        }
+
+        // radio buttons and checkboxes are buttons too, the dialog's own buttons are not rows
+        val isDialogButton = view is Button && view !is CompoundButton
+        if (view.isClickable && !isDialogButton && view !is EditText && view.getTag(R.id.dpad_focus_prepared) == null) {
+            rows.add(view)
+        }
+
+        if (view is ViewGroup) {
+            for (i in 0 until view.childCount) {
+                collect(view.getChildAt(i))
+            }
+        }
+    }
+    collect(root)
+
+    rows.forEach {
+        it.setTag(R.id.dpad_focus_prepared, true)
+        it.isFocusable = true
+        it.applyDpadFocusHighlight()
+    }
+
+    val focused = root.findFocus()
+    if (focused == null || focused is Button) {
+        val target = rows.firstOrNull { it is CompoundButton && it.isChecked } ?: rows.firstOrNull()
+        target?.requestFocus()
+    }
+}

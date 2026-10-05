@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_coordinator"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <org.fossify.commons.views.MyAppBarLayout
+        android:id="@+id/main_appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/main_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/color_primary"
+            app:titleTextAppearance="@style/AppTheme.ActionBar.TitleTextStyle" />
+
+    </org.fossify.commons.views.MyAppBarLayout>
+
+    <RelativeLayout
+        android:id="@+id/main_holder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <org.fossify.clock.views.DpadViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/main_tabs_holder" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/main_home"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:id="@+id/main_home_holder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/small_margin">
+
+                <LinearLayout
+                    android:id="@+id/home_clock"
+                    style="@style/DpadHomeRow">
+
+                    <ImageView
+                        android:id="@+id/home_clock_icon"
+                        style="@style/DpadHomeRowIcon"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_clock_vector" />
+
+                    <org.fossify.commons.views.MyTextView
+                        android:id="@+id/home_clock_label"
+                        style="@style/DpadHomeRowLabel"
+                        android:text="@string/dpad_clock" />
+
+                    <org.fossify.commons.views.MyTextView
+                        android:id="@+id/home_clock_status"
+                        style="@style/DpadHomeRowStatus" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/home_alarm"
+                    style="@style/DpadHomeRow">
+
+                    <ImageView
+                        android:id="@+id/home_alarm_icon"
+                        style="@style/DpadHomeRowIcon"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_alarm_vector" />
+
+                    <org.fossify.commons.views.MyTextView
+                        android:id="@+id/home_alarm_label"
+                        style="@style/DpadHomeRowLabel"
+                        android:text="@string/alarm" />
+
+                    <org.fossify.commons.views.MyTextView
+                        android:id="@+id/home_alarm_status"
+                        style="@style/DpadHomeRowStatus" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/home_stopwatch"
+                    style="@style/DpadHomeRow">
+
+                    <ImageView
+                        android:id="@+id/home_stopwatch_icon"
+                        style="@style/DpadHomeRowIcon"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_stopwatch_vector" />
+
+                    <org.fossify.commons.views.MyTextView
+                        android:id="@+id/home_stopwatch_label"
+                        style="@style/DpadHomeRowLabel"
+                        android:text="@string/stopwatch" />
+
+                    <org.fossify.commons.views.MyTextView
+                        android:id="@+id/home_stopwatch_status"
+                        style="@style/DpadHomeRowStatus" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/home_timer"
+                    style="@style/DpadHomeRow">
+
+                    <ImageView
+                        android:id="@+id/home_timer_icon"
+                        style="@style/DpadHomeRowIcon"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_hourglass_vector" />
+
+                    <org.fossify.commons.views.MyTextView
+                        android:id="@+id/home_timer_label"
+                        style="@style/DpadHomeRowLabel"
+                        android:text="@string/timer" />
+
+                    <org.fossify.commons.views.MyTextView
+                        android:id="@+id/home_timer_status"
+                        style="@style/DpadHomeRowStatus" />
+
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/home_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:layout_marginBottom="@dimen/small_margin"
+                    android:background="@color/divider_grey" />
+
+                <LinearLayout
+                    android:id="@+id/home_settings"
+                    style="@style/DpadHomeRow">
+
+                    <ImageView
+                        android:id="@+id/home_settings_icon"
+                        style="@style/DpadHomeRowIcon"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_settings_cog_vector" />
+
+                    <org.fossify.commons.views.MyTextView
+                        android:id="@+id/home_settings_label"
+                        style="@style/DpadHomeRowLabel"
+                        android:text="@string/settings" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <!-- the screens are opened from the home list, the tabs stay for the activity code -->
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/main_tabs_holder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:visibility="gone"
+            app:tabIndicator="@null"
+            app:tabMinWidth="150dp"
+            app:tabRippleColor="@null" />
+
+    </RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
