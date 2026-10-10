@@ -242,7 +242,8 @@ class AlarmsAdapter(
                     KeyEvent.KEYCODE_DPAD_RIGHT -> true
                     else -> return@setOnKeyListener false
                 }
-                if (event.action == KeyEvent.ACTION_DOWN) {
+                // on key up: the first switch shows Commons' warning dialog, opened during a key press it gets no keys
+                if (event.action == KeyEvent.ACTION_UP && !event.isCanceled) {
                     setAlarmEnabled(this, alarm, enable)
                 }
                 true

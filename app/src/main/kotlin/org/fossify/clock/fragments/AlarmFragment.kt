@@ -47,7 +47,8 @@ import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
 class AlarmFragment : Fragment(), ToggleAlarmInterface, DpadScreen {
-    private var wereAlarmsShown = false
+    private var wereAlarmsLoaded = false
+    private var focusFirstWhenLoaded = false
     private var alarms = ArrayList<Alarm>()
     private var currentEditAlarmDialog: EditAlarmDialog? = null
 
@@ -95,6 +96,20 @@ class AlarmFragment : Fragment(), ToggleAlarmInterface, DpadScreen {
         }
 
         setupAlarms()
+    }
+
+    /** The first alarm (or the "+" row without alarms); opened before they're loaded, it waits for them. */
+    override fun focusFirst(): Boolean {
+        if (!wereAlarmsLoaded || view == null) {
+            focusFirstWhenLoaded = true
+            return true
+        }
+
+        binding.alarmFragment.scrollTo(0, 0)
+        if (alarms.isEmpty() || !binding.alarmsList.focusItem(0)) {
+            binding.alarmsAdd.root.requestFocus()
+        }
+        return true
     }
 
     /** Delete for the focused alarm (OK opens it, left / right switch it), then add and sort. */
@@ -202,12 +217,11 @@ class AlarmFragment : Fragment(), ToggleAlarmInterface, DpadScreen {
             }
             binding.alarmsPlaceholder.beVisibleIf(alarms.isEmpty())
 
-            // the screen can be opened before the alarms are loaded, the "+" row got the focus then: the first
-            // alarm takes it over once they show up
-            if (alarms.isNotEmpty() && binding.alarmsAdd.root.isFocused && !wereAlarmsShown) {
-                binding.alarmsList.focusItem(0)
+            wereAlarmsLoaded = true
+            if (focusFirstWhenLoaded) {
+                focusFirstWhenLoaded = false
+                focusFirst()
             }
-            wereAlarmsShown = wereAlarmsShown || alarms.isNotEmpty()
         }
     }
 

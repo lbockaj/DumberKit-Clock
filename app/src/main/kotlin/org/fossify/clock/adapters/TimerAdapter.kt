@@ -221,7 +221,9 @@ class TimerAdapter(
                     KeyEvent.KEYCODE_DPAD_LEFT -> false
                     else -> return@setOnKeyListener false
                 }
-                if (event.action == KeyEvent.ACTION_DOWN && event.repeatCount == 0) {
+                // on key up: starting may ask for the notification permission, a dialog opened during a key press
+                // gets no keys
+                if (event.action == KeyEvent.ACTION_UP && !event.isCanceled) {
                     setTimerRunning(timer, start)
                 }
                 true

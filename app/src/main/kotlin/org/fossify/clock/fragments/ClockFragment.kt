@@ -1,5 +1,7 @@
 package org.fossify.clock.fragments
 
+import org.fossify.clock.helpers.dpadPopupMenu
+import org.fossify.clock.helpers.focusItem
 import org.fossify.clock.helpers.focusedAdapterPosition
 import org.fossify.clock.helpers.applyDpadFocusHighlight
 import org.fossify.commons.extensions.applyColorFilter
@@ -163,6 +165,7 @@ class ClockFragment : Fragment(), DpadScreen {
                     updateTimeZones()
                 }
             }.apply {
+                onHoldOk = ::showTimeZoneActions
                 this@ClockFragment.binding.timeZonesList.adapter = this
             }
         } else {
@@ -181,19 +184,53 @@ class ClockFragment : Fragment(), DpadScreen {
         val focusedZone = adapter?.timeZones?.getOrNull(binding.timeZonesList.focusedAdapterPosition())
         val items = ArrayList<Pair<Int, () -> Unit>>()
         if (adapter != null && focusedZone != null) {
-            items += org.fossify.commons.R.string.delete to {
-                adapter.deleteTimeZone(focusedZone)
-                binding.timeZonesAdd.root.takeIf { adapter.timeZones.isEmpty() }?.requestFocus()
-            }
+            items += org.fossify.commons.R.string.delete to { deleteTimeZone(focusedZone) }
         }
         items += R.string.dpad_add_time_zone to ::addTimeZone
         return items
     }
 
+    /** Holding OK on a time zone: rename it (like OK), delete it. */
+    private fun showTimeZoneActions(itemView: View, timeZone: MyTimeZone) {
+        val context = context ?: return
+        context.dpadPopupMenu(itemView).apply {
+            menu.add(0, 0, 0, org.fossify.commons.R.string.rename)
+            menu.add(0, 1, 1, org.fossify.commons.R.string.delete)
+            setOnMenuItemClickListener {
+                if (it.itemId == 0) {
+                    itemView.performClick()
+                } else {
+                    deleteTimeZone(timeZone)
+                }
+                true
+            }
+            show()
+        }
+    }
+
+    /** Deletes the time zone, the focus goes to the next one (or the "+" row when none is left). */
+    private fun deleteTimeZone(timeZone: MyTimeZone) {
+        val adapter = binding.timeZonesList.adapter as? TimeZonesAdapter ?: return
+        val position = adapter.timeZones.indexOf(timeZone)
+        adapter.deleteTimeZone(timeZone)
+        if (adapter.timeZones.isEmpty()) {
+            binding.timeZonesAdd.root.requestFocus()
+        } else {
+            binding.timeZonesList.focusItem(position.coerceAtMost(adapter.timeZones.lastIndex))
+        }
+    }
+
+    /** After picking time zones the focus goes to the first newly added one, so the Menu offers deleting it. */
     fun addTimeZone() {
         val safeContext = activity as? SimpleActivity ?: return
+        val before = safeContext.config.selectedTimeZones.toSet()
         AddTimeZonesDialog(safeContext) {
             updateTimeZones()
+            val zones = (binding.timeZonesList.adapter as? TimeZonesAdapter)?.timeZones.orEmpty()
+            val added = zones.indexOfFirst { it.id.toString() !in before }
+            if (added != -1) {
+                binding.timeZonesList.post { binding.timeZonesList.focusItem(added) }
+            }
         }
     }
 }

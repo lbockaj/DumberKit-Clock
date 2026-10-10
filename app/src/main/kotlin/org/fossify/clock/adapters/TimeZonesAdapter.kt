@@ -66,10 +66,16 @@ class TimeZonesAdapter(activity: SimpleActivity, var timeZones: ArrayList<MyTime
         }
         bindViewHolder(holder)
 
-        // keypad: OK (also held) renames the time zone, no touch selection mode; deleting is in the Menu
-        holder.itemView.setOnLongClickListener(null)
-        holder.itemView.isLongClickable = false
+        // keypad: OK renames the time zone, holding OK shows rename / delete (no touch selection mode); deleting is
+        // in the Menu too
+        holder.itemView.setOnLongClickListener {
+            onHoldOk(holder.itemView, timeZone)
+            true
+        }
     }
+
+    /** Holding OK on a time zone, set by the screen (rename / delete). */
+    var onHoldOk: (View, MyTimeZone) -> Unit = { _, _ -> }
 
     @SuppressLint("NotifyDataSetChanged")
     fun deleteTimeZone(timeZone: MyTimeZone) {

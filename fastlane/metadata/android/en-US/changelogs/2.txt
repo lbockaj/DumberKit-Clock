@@ -1,0 +1,1 @@
+First release: a home list instead of tabs, keypad control on every screen, times typed with the digits, a ringing alarm and a finished timer you stop with the arrows, and a full-screen alarm on DumberOS too.

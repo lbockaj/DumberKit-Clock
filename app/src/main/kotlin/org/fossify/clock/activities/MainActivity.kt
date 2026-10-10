@@ -1,5 +1,6 @@
 package org.fossify.clock.activities
 
+import org.fossify.commons.extensions.beInvisible
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.ShortcutInfo
@@ -406,7 +407,9 @@ class MainActivity : SimpleActivity() {
 
     private fun showHome() {
         showingHome = true
-        binding.viewPager.beGone()
+        // invisible, not gone: the screens stay laid out, so one opens with its items already there (no flicker of
+        // the focus over a half-built screen)
+        binding.viewPager.beInvisible()
         binding.mainHome.beVisible()
         binding.mainToolbar.title = getString(R.string.app_launcher_name)
         updateHomeStatus()
@@ -428,9 +431,11 @@ class MainActivity : SimpleActivity() {
 
     private fun showScreen(index: Int) {
         showingHome = false
-        binding.mainHome.beGone()
         binding.viewPager.beVisible()
         binding.viewPager.setCurrentItem(index, false)
+        // the screen's first item takes the focus before the home list goes away, so nothing else flashes
+        val focusedByScreen = getViewPagerAdapter()?.getScreen(index)?.focusFirst() == true
+        binding.mainHome.beGone()
         homeScreens.firstOrNull { it.second == index }?.let { lastHomeRow = it.first }
         binding.mainToolbar.title = getString(
             when (index) {
@@ -440,7 +445,9 @@ class MainActivity : SimpleActivity() {
                 else -> R.string.dpad_clock
             }
         )
-        binding.viewPager.post { binding.viewPager.requestFocus() }
+        if (!focusedByScreen) {
+            binding.viewPager.post { binding.viewPager.requestFocus() }
+        }
     }
 
     /** Current time, running stopwatch and timer, refreshed every second while the list is shown. */

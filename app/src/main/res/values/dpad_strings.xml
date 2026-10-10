@@ -64,4 +64,14 @@
     <string name="dpad_alarm_over_apps">Alarm over other apps</string>
     <string name="dpad_allowed">Allowed</string>
     <string name="dpad_not_allowed">Not allowed, the alarm only rings on an unlocked phone</string>
+    <string name="dpad_timer_restart">Again</string>
+    <string name="dpad_timer_stop">Stop</string>
+    <string name="dpad_about_ringing_alarm">Ringing alarm</string>
+    <string name="dpad_about_timer_finished">Time is up (timer)</string>
+    <string name="dpad_key_left_ok_back">← / OK / Back</string>
+    <string name="dpad_key_right_ok_back">→ / OK / Back</string>
+    <string name="dpad_key_ringing_snooze_action">Snooze</string>
+    <string name="dpad_key_ringing_dismiss_action">Turn the alarm off</string>
+    <string name="dpad_key_timer_finished_again_action">Start the timer again</string>
+    <string name="dpad_key_timer_finished_stop_action">Stop it</string>
 </resources>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Finished timer for keypad phones, like the ringing alarm: the duration on top, then restart ← timer → stop in
+     a row, the arrows being the keys, with a short text under restart and stop -->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/timer_finished_holder"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <org.fossify.commons.views.MyTextView
+        android:id="@+id/timer_finished_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFeatureSettings="tnum"
+        android:textSize="@dimen/dpad_ringing_time_size"
+        app:layout_constraintBottom_toTopOf="@+id/timer_finished_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="05:00" />
+
+    <!-- the timer's label, or "Time expired" -->
+    <org.fossify.commons.views.MyTextView
+        android:id="@+id/timer_finished_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/activity_margin"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="2"
+        android:textSize="@dimen/big_text_size"
+        app:layout_constraintBottom_toTopOf="@+id/timer_finished_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timer_finished_time"
+        tools:text="@string/time_expired" />
+
+    <ImageView
+        android:id="@+id/timer_finished_restart"
+        android:layout_width="@dimen/reminder_background_min_size"
+        android:layout_height="@dimen/reminder_background_min_size"
+        android:contentDescription="@string/dpad_timer_restart"
+        android:padding="@dimen/activity_margin"
+        android:src="@drawable/ic_restart_alt_vector"
+        app:layout_constraintBottom_toBottomOf="@+id/timer_finished_icon"
+        app:layout_constraintEnd_toStartOf="@+id/timer_finished_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/timer_finished_icon" />
+
+    <ImageView
+        android:id="@+id/timer_finished_icon_background"
+        android:layout_width="@dimen/reminder_background_min_size"
+        android:layout_height="@dimen/reminder_background_min_size"
+        android:alpha="0.2"
+        android:importantForAccessibility="no"
+        android:padding="@dimen/medium_margin"
+        android:src="@drawable/pulsing_background"
+        app:layout_constraintBottom_toBottomOf="@+id/timer_finished_icon"
+        app:layout_constraintEnd_toEndOf="@+id/timer_finished_icon"
+        app:layout_constraintStart_toStartOf="@+id/timer_finished_icon"
+        app:layout_constraintTop_toTopOf="@+id/timer_finished_icon" />
+
+    <ImageView
+        android:id="@+id/timer_finished_icon"
+        android:layout_width="@dimen/reminder_background_min_size"
+        android:layout_height="@dimen/reminder_background_min_size"
+        android:importantForAccessibility="no"
+        android:padding="@dimen/activity_margin"
+        android:src="@drawable/ic_hourglass_vector"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/timer_finished_stop"
+        app:layout_constraintStart_toEndOf="@+id/timer_finished_restart"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.6" />
+
+    <ImageView
+        android:id="@+id/timer_finished_stop"
+        android:layout_width="@dimen/reminder_background_min_size"
+        android:layout_height="@dimen/reminder_background_min_size"
+        android:contentDescription="@string/dpad_timer_stop"
+        android:padding="@dimen/activity_margin"
+        android:src="@drawable/ic_stop_vector"
+        app:layout_constraintBottom_toBottomOf="@+id/timer_finished_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/timer_finished_icon"
+        app:layout_constraintTop_toTopOf="@+id/timer_finished_icon" />
+
+    <org.fossify.commons.views.MyTextView
+        android:id="@+id/timer_finished_restart_label"
+        style="@style/DpadRingingLabel"
+        android:text="@string/dpad_timer_restart"
+        app:layout_constraintEnd_toEndOf="@+id/timer_finished_restart"
+        app:layout_constraintStart_toStartOf="@+id/timer_finished_restart"
+        app:layout_constraintTop_toBottomOf="@+id/timer_finished_restart" />
+
+    <!-- the keys: left restarts, right (or OK, or Back) stops -->
+    <ImageView
+        android:id="@+id/timer_finished_left_hint"
+        android:layout_width="@dimen/dpad_stopwatch_hint_size"
+        android:layout_height="@dimen/dpad_stopwatch_hint_size"
+        android:alpha="0.6"
+        android:importantForAccessibility="no"
+        android:src="@drawable/ic_dpad_arrow_left_vector"
+        app:layout_constraintBottom_toBottomOf="@+id/timer_finished_icon"
+        app:layout_constraintEnd_toStartOf="@+id/timer_finished_icon"
+        app:layout_constraintStart_toEndOf="@+id/timer_finished_restart"
+        app:layout_constraintTop_toTopOf="@+id/timer_finished_icon" />
+
+    <ImageView
+        android:id="@+id/timer_finished_right_hint"
+        android:layout_width="@dimen/dpad_stopwatch_hint_size"
+        android:layout_height="@dimen/dpad_stopwatch_hint_size"
+        android:alpha="0.6"
+        android:importantForAccessibility="no"
+        android:src="@drawable/ic_dpad_arrow_right_vector"
+        app:layout_constraintBottom_toBottomOf="@+id/timer_finished_icon"
+        app:layout_constraintEnd_toStartOf="@+id/timer_finished_stop"
+        app:layout_constraintStart_toEndOf="@+id/timer_finished_icon"
+        app:layout_constraintTop_toTopOf="@+id/timer_finished_icon" />
+
+    <org.fossify.commons.views.MyTextView
+        android:id="@+id/timer_finished_stop_label"
+        style="@style/DpadRingingLabel"
+        android:text="@string/dpad_timer_stop"
+        app:layout_constraintEnd_toEndOf="@+id/timer_finished_stop"
+        app:layout_constraintStart_toStartOf="@+id/timer_finished_stop"
+        app:layout_constraintTop_toBottomOf="@+id/timer_finished_stop" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -56,4 +56,14 @@
     <string name="dpad_alarm_over_apps">Budík cez iné aplikácie</string>
     <string name="dpad_allowed">Povolené</string>
     <string name="dpad_not_allowed">Nepovolené, pri odomknutom telefóne budík len zvoní</string>
+    <string name="dpad_timer_restart">Znova</string>
+    <string name="dpad_timer_stop">Vypnúť</string>
+    <string name="dpad_about_ringing_alarm">Zvoniaci budík</string>
+    <string name="dpad_about_timer_finished">Dobehnutý časovač</string>
+    <string name="dpad_key_left_ok_back">← / OK / Späť</string>
+    <string name="dpad_key_right_ok_back">→ / OK / Späť</string>
+    <string name="dpad_key_ringing_snooze_action">Odložiť</string>
+    <string name="dpad_key_ringing_dismiss_action">Vypnúť budík</string>
+    <string name="dpad_key_timer_finished_again_action">Spustiť časovač znova</string>
+    <string name="dpad_key_timer_finished_stop_action">Vypnúť</string>
 </resources>

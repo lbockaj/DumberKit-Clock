@@ -46,7 +46,16 @@ class DpadAboutActivity : SimpleActivity() {
         ),
         R.string.dpad_clock to listOf(
             R.string.dpad_key_ok to R.string.dpad_key_clock_ok_action,
+            R.string.dpad_key_ok_hold to R.string.dpad_key_clock_ok_hold_action,
             R.string.dpad_key_menu to R.string.dpad_key_clock_menu_action
+        ),
+        R.string.dpad_about_ringing_alarm to listOf(
+            R.string.dpad_key_left_ok_back to R.string.dpad_key_ringing_snooze_action,
+            R.string.dpad_key_right to R.string.dpad_key_ringing_dismiss_action
+        ),
+        R.string.dpad_about_timer_finished to listOf(
+            R.string.dpad_key_left to R.string.dpad_key_timer_finished_again_action,
+            R.string.dpad_key_right_ok_back to R.string.dpad_key_timer_finished_stop_action
         ),
         R.string.dpad_about_time_picker to listOf(
             R.string.dpad_key_digits to R.string.dpad_key_picker_digits_action,

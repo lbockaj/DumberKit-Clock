@@ -1,13 +1,22 @@
-A clock, alarm, stopwatch and timer for keypad phones like the Qin F21, Dumber Mini or Doov R77 Pro. Every screen, menu and dialog works with the D-pad and the keypad, no touchscreen needed.
+A clock, alarm, stopwatch and timer for keypad phones like the Qin F21, Dumber Mini or Doov R77 Pro. Every screen, list and dialog works with the D-pad and the keypad: no floating buttons, nothing to drag or swipe, sized for a 480×640 screen. Touch is switched off inside the app, so nothing gets pressed by accident in your pocket.
 
-<ul>
-<li>Opens on a simple list: Clock, Alarm, Stopwatch, Timer, Settings</li>
-<li>Alarms: OK edits, left / right switch them off / on, days picked from a checklist</li>
-<li>Times typed with the digits (0730 = 07:30)</li>
-<li>Ringing alarm: left or OK snoozes, right dismisses</li>
-<li>Stopwatch with laps, timers with their own sound and label</li>
-<li>Your time zone and other time zones on the Clock screen</li>
-<li>No ads, no tracking, no internet access</li>
-</ul>
+<b>Keys</b>
+• 1–5 – open Clock, Alarm, Stopwatch, Timer or Settings from the home list
+• ← / → – switch an alarm off / on, start or pause a timer
+• OK – open an alarm, start or pause the stopwatch
+• Digits – type a time straight away (0730 = 07:30)
+• Ringing alarm – ←, OK or Back snooze, → turns it off
+• Finished timer – ← starts it again, → stops it
+• Menu – the screen's other actions; a + row at the end of every list adds a new item
+
+<b>Features</b>
+• A home list that shows the time, the next alarm and a running stopwatch or timer
+• Alarms with days to repeat, sound, vibration and a label
+• Stopwatch with laps, timers with their own sound and label
+• Your own and other time zones on the Clock screen
+• The ringing alarm and a finished timer open on the whole screen, also on DumberOS without pop-up notifications
+• System, light, dark and custom themes, purple or any other icon color
+• Export and import of alarms and timers
+• No ads, no tracking, no internet access
 
 Based on Fossify Clock (GPL-3.0).

@@ -1,5 +1,6 @@
 package org.fossify.clock.extensions
 
+import org.fossify.clock.activities.TimerFinishedActivity
 import android.app.AlarmManager
 import android.app.Notification
 import android.app.NotificationChannel
@@ -465,6 +466,8 @@ fun Context.getTimerNotification(timer: Timer, pendingIntent: PendingIntent): No
         .setContentText(getString(R.string.time_expired))
         .setSmallIcon(R.drawable.ic_hourglass_vector)
         .setContentIntent(pendingIntent)
+        // locked or with the screen off, the full screen "time expired" opens (see App.showTimerFinishedScreen)
+        .setFullScreenIntent(getTimerFinishedPendingIntent(timer.id!!), true)
         .setPriority(NotificationCompat.PRIORITY_MAX)
         .setDefaults(Notification.DEFAULT_LIGHTS)
         .setCategory(Notification.CATEGORY_EVENT)
@@ -487,6 +490,20 @@ fun Context.getTimerNotification(timer: Timer, pendingIntent: PendingIntent): No
     notification.flags = notification.flags or Notification.FLAG_INSISTENT
     return notification
 }
+
+private const val TIMER_FINISHED_REQUEST_CODE_OFFSET = 200000
+
+fun Context.getTimerFinishedIntent(timerId: Int) = Intent(this, TimerFinishedActivity::class.java).apply {
+    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+    putExtra(TIMER_ID, timerId)
+}
+
+fun Context.getTimerFinishedPendingIntent(timerId: Int): PendingIntent = PendingIntent.getActivity(
+    this,
+    TIMER_FINISHED_REQUEST_CODE_OFFSET + timerId,
+    getTimerFinishedIntent(timerId),
+    PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+)
 
 fun Context.getHideTimerPendingIntent(timerId: Int): PendingIntent {
     val intent = Intent(this, HideTimerReceiver::class.java)

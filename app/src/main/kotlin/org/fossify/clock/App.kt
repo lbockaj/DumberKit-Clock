@@ -1,5 +1,10 @@
 package org.fossify.clock
 
+import org.fossify.clock.helpers.keepIconColorWithThemes
+import android.app.KeyguardManager
+import android.os.PowerManager
+import android.provider.Settings
+import org.fossify.clock.extensions.getTimerFinishedIntent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,6 +56,7 @@ import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
 private const val PURPLE_ICON_SET = "dumberkit_purple_icon"
+private const val ICON_ALIASES_RENAMED = "dumberkit_icon_aliases_renamed"
 
 class App : FossifyApp(), LifecycleObserver {
 
@@ -61,10 +67,14 @@ class App : FossifyApp(), LifecycleObserver {
         ProcessLifecycleOwner.get().lifecycle.addObserver(this)
         EventBus.getDefault().register(this)
         usePurpleIconByDefault()
+        migrateRenamedIconAliases()
         useSystemThemeByDefault()
         // Commons calls any build without one of its unused images (removed by the release shrinker) a "fake version"
         // and sends people to its website; this app is built from its own source on purpose
         baseConfig.appSideloadingStatus = SIDELOADING_FALSE
+        // Commons warns about launchers losing the icon (and tells to restore the green one) before the first theme
+        // pick; the icon colors work here, and the warning stopped the first pick
+        baseConfig.wasAppIconCustomizationWarningShown = true
         registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks {
             override fun onActivityResumed(activity: Activity) {
                 // keys only: touches are ignored in every screen of the app
@@ -78,7 +88,13 @@ class App : FossifyApp(), LifecycleObserver {
                 }
             }
 
-            override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {}
+            override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
+                // runs inside the screen's own onCreate, before it sets up its themes
+                if (activity is CustomizationActivity) {
+                    activity.keepIconColorWithThemes()
+                }
+            }
+
             override fun onActivityStarted(activity: Activity) {}
             override fun onActivityPaused(activity: Activity) {}
             override fun onActivityStopped(activity: Activity) {}
@@ -187,6 +203,24 @@ class App : FossifyApp(), LifecycleObserver {
         }
     }
 
+    /**
+     * Commons looks the launcher entries up by the app id (com.dumberkit.clock.activities.SplashActivity.Red…), they
+     * were named after the code package before, so picking another icon color failed. After the rename an update
+     * starts with the default entry enabled: switch once to the color the user had picked.
+     */
+    private fun migrateRenamedIconAliases() {
+        val prefs = getSharedPreferences(PREFS_KEY, MODE_PRIVATE)
+        if (prefs.getBoolean(ICON_ALIASES_RENAMED, false)) {
+            return
+        }
+
+        prefs.edit().putBoolean(ICON_ALIASES_RENAMED, true).apply()
+        if (baseConfig.appId.isNotEmpty()) {
+            baseConfig.lastIconColor = 0
+            checkAppIconColor()
+        }
+    }
+
     /** The "System" color theme unless one was chosen; Commons only defaults to it on Android 12+. */
     private fun useSystemThemeByDefault() {
         val prefs = getSharedPreferences(PREFS_KEY, MODE_PRIVATE)
@@ -275,6 +309,7 @@ class App : FossifyApp(), LifecycleObserver {
             }
 
             updateTimerState(event.timerId, TimerState.Finished)
+            Handler(Looper.getMainLooper()).post { showTimerFinishedScreen(event.timerId) }
             Handler(Looper.getMainLooper()).postDelayed({
                 hideNotification(event.timerId)
             }, config.timerMaxReminderSecs * 1000L)
@@ -289,6 +324,26 @@ class App : FossifyApp(), LifecycleObserver {
                 TimerState.Paused(event.duration, (timer.state as TimerState.Running).tick)
             )
             countDownTimers[event.timerId]?.cancel()
+        }
+    }
+
+    /**
+     * Locked or with the screen off, the notification's full screen intent opens the "time expired" screen. Unlocked
+     * it would only be a pop-up notification, and DumberOS has those turned off: open the screen directly when the
+     * app is in use, or from the background with "Display over other apps", like the alarm (see AlarmService).
+     */
+    private fun showTimerFinishedScreen(timerId: Int) {
+        val keyguard = getSystemService(KEYGUARD_SERVICE) as KeyguardManager
+        val power = getSystemService(POWER_SERVICE) as PowerManager
+        val inForeground = ProcessLifecycleOwner.get().lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)
+        if (!power.isInteractive || keyguard.isKeyguardLocked || !(inForeground || Settings.canDrawOverlays(this))) {
+            return
+        }
+
+        try {
+            startActivity(getTimerFinishedIntent(timerId))
+        } catch (ignored: Exception) {
+            // the notification still shows and sounds
         }
     }
 
