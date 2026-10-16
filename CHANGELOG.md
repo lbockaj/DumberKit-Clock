@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.1] - 2026-10-16
+### Fixed
+- The warning "You are using a fake version of the app", which Commons showed now and then, no longer shows up
+- The selected dialog button is much easier to see
+- On phones with an on-screen navigation bar the last rows of the settings and About stay above it
+
 ## [1.0.0] - 2026-10-10
 First release, based on Fossify Clock 1.6.0.
 

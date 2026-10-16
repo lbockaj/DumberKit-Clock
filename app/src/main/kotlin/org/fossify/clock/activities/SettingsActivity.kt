@@ -81,7 +81,9 @@ class SettingsActivity : SimpleActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        setupEdgeToEdge(padBottomSystem = listOf(binding.settingsNestedScrollview))
+        // a margin, not padding: Android's scroll views ignore their padding when they scroll to the focused row, the
+        // last rows ended up under the navigation bar
+        setupEdgeToEdge(moveBottomSystem = listOf(binding.settingsNestedScrollview))
         setupMaterialScrollListener(binding.settingsNestedScrollview, binding.settingsAppbar)
     }
 

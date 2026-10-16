@@ -54,6 +54,7 @@ import org.fossify.commons.extensions.showErrorToast
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
+import org.fossify.clock.helpers.removeModdedAppWarning
 
 private const val PURPLE_ICON_SET = "dumberkit_purple_icon"
 private const val ICON_ALIASES_RENAMED = "dumberkit_icon_aliases_renamed"
@@ -95,7 +96,10 @@ class App : FossifyApp(), LifecycleObserver {
                 }
             }
 
-            override fun onActivityStarted(activity: Activity) {}
+            override fun onActivityStarted(activity: Activity) {
+                // shown by Commons in the screen's onCreate, see ModdedAppWarning.kt
+                activity.removeModdedAppWarning()
+            }
             override fun onActivityPaused(activity: Activity) {}
             override fun onActivityStopped(activity: Activity) {}
             override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}

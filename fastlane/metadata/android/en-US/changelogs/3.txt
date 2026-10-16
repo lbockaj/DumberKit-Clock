@@ -1,0 +1,2 @@
+• No more "fake version" warnings
+• The selected dialog button is easier to see
